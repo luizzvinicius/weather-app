@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.debug {
+  border: 1px solid red;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
