@@ -1,14 +1,13 @@
 import Carousel from "@/components/Carousel"
 import Navbar from "@/components/Navbar"
-import { HiMenuAlt4 } from "react-icons/hi"
-import { PiCalendarDots } from "react-icons/pi"
+import { Icon } from "@iconify-icon/react"
 
 export default function Home() {
 	return (
 		<div className="bg-black h-screen">
 			<header className="flex justify-between items-center px-4">
-				<HiMenuAlt4 className="text-white size-6" />
-				<PiCalendarDots className="text-white size-6" />
+				<Icon icon="hugeicons:menu-09" className="text-white text-lg" />
+				<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
 			</header>
 			<Carousel />
 			<Navbar />
