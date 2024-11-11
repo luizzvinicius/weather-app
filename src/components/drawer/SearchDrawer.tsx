@@ -1,20 +1,20 @@
+"use client"
+import { useWeatherForecast } from "@/app/hooks/useWeatherForecast"
 import { useDeferredValue, useState } from "react"
-
-const getWeatherByCity = async (cityName: string) => {
-	const request = await fetch(
-		`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${process.env.NEXT_PUBLIC_API_KEY}`,
-	)
-	const data = await request.json()
-	console.log(data)
-}
 
 export default function SearchDrawer({
 	toggleDrawer,
 	isOpen,
 }: { toggleDrawer: any; isOpen: boolean }) {
-	const [inputValue, setValue] = useState<string>("")
+	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
-	console.log(deferredInput)
+	// se não tem erro, nem está pendente, foi
+
+	function handleClick() {
+		setValue(prev => ({ ...prev, valid: true }))
+	}
+	const { data, isPending, isError } = useWeatherForecast(deferredInput)
+	console.log(data)
 
 	return (
 		<div className={`${isOpen ? "open" : "closed"}Drawer debug bg-[#1d1e30] flex`}>
@@ -25,11 +25,13 @@ export default function SearchDrawer({
 				<input
 					placeholder="Digite a cidade para pesquisa"
 					className="h-6 w-64 text-black"
-					value={inputValue}
-					onChange={e => setValue(e.target.value)}
+					value={inputValue.value}
+					onChange={e => setValue(prev => ({ ...prev, value: e.target.value }))}
 				/>
 			</div>
-			<button type="button" onClick={() => getWeatherByCity(deferredInput)} className="debug">
+			{isError ? <h1>Error while Fetching</h1> : <></>}
+
+			<button type="button" onClick={handleClick} className="debug">
 				search
 			</button>
 		</div>
