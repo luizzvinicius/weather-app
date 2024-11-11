@@ -52,7 +52,8 @@
 				"noAssignInExpressions": "off",
 				"noConstEnum": "error",
 				"noDoubleEquals": "error",
-				"useAwait": "error"
+				"useAwait": "error",
+				"noConsole": "warn"
 			},
 			"a11y": {
 				"useAltText": "warn"
