@@ -3,15 +3,18 @@ import Carousel from "@/components/Carousel"
 import Navbar from "@/components/Navbar"
 import SearchDrawer from "@/components/drawer/SearchDrawer"
 import { Icon } from "@iconify-icon/react"
-import useToggle from "./hooks/useToggle"
+import useToggle from "../hooks/useToggle"
 import Widget from "@/components/Widget"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { useState } from "react"
+import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
 
 const queryClient = new QueryClient()
 
 export default function Home() {
 	const { value, toggleDrawer } = useToggle()
+	const [weatherForeCast, setWeatherForeCast] = useState<ThreeHourResponse | undefined>()
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -21,11 +24,15 @@ export default function Home() {
 					<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
 				</header>
 				<div className="">
-					<Widget />
+					<Widget forecast={weatherForeCast} />
 				</div>
 				<div className="">
-					<Carousel />
-					<SearchDrawer toggleDrawer={toggleDrawer} isOpen={value} />
+					<Carousel forecast={weatherForeCast} />
+					<SearchDrawer
+						toggleDrawer={toggleDrawer}
+						isOpen={value}
+						setWeatherForeCast={setWeatherForeCast}
+					/>
 					<Navbar toggleDrawer={toggleDrawer} />
 				</div>
 			</div>

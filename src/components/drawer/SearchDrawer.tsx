@@ -1,11 +1,15 @@
 "use client"
-import { useWeatherForecast } from "@/app/hooks/useWeatherForecast"
-import { useDeferredValue, useState } from "react"
+import { useWeatherForecast } from "@/hooks/useWeatherForecast"
+import { useDeferredValue, useEffect, useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Icon } from "@iconify-icon/react"
 
 export default function SearchDrawer({
 	toggleDrawer,
 	isOpen,
-}: { toggleDrawer: any; isOpen: boolean }) {
+	setWeatherForeCast,
+}: { toggleDrawer: () => void; isOpen: boolean; setWeatherForeCast: any }) {
 	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
 	// se não tem erro, nem está pendente, foi
@@ -14,26 +18,31 @@ export default function SearchDrawer({
 		setValue(prev => ({ ...prev, valid: true }))
 	}
 	const { data, isPending, isError } = useWeatherForecast(deferredInput)
-	console.log(data)
+
+	useEffect(() => {
+		if (!isPending && !isError) {
+			setWeatherForeCast(data)
+		}
+	})
 
 	return (
-		<div className={`${isOpen ? "open" : "closed"}Drawer debug bg-[#1d1e30] flex`}>
-			<div className="flex debug w-[100%] justify-center">
-				<button type="button" onClick={toggleDrawer} className="debug">
-					X
-				</button>
-				<input
+		<div className={`${isOpen ? "open" : "closed"}Drawer bg-[#1d1e30] `}>
+			<button type="button" onClick={toggleDrawer}>
+				X
+			</button>
+			<h1>Consulte sua cidade</h1>
+			<div className="flex justify-center items-center gap-x-2">
+				<Input
+					className="w-60 h-[90%] text-black focus-visible:ring-[#1d1e30]"
 					placeholder="Digite a cidade para pesquisa"
-					className="h-6 w-64 text-black"
 					value={inputValue.value}
 					onChange={e => setValue(prev => ({ ...prev, value: e.target.value }))}
 				/>
+				<Button type="button" onClick={handleClick} className="bg-black">
+					<Icon icon="mynaui:search" className="text-white text-lg cursor-pointer" />
+				</Button>
 			</div>
 			{isError ? <h1>Error while Fetching</h1> : <></>}
-
-			<button type="button" onClick={handleClick} className="debug">
-				search
-			</button>
 		</div>
 	)
 }
