@@ -21,18 +21,27 @@ export default function Home() {
 			<div className="bg-black h-screen flex justify-between flex-col pb-5">
 				<header className="flex justify-between items-center p-4">
 					<Icon icon="hugeicons:menu-09" className="text-white text-lg" />
+
+					{weatherForeCast === undefined ? (
+						<span className="text-white">Pesquise uma cidade</span>
+					) : (
+						<></>
+					)}
+
 					<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
 				</header>
-				<div className="">
-					<Widget forecast={weatherForeCast} />
-				</div>
-				<div className="">
-					<Carousel forecast={weatherForeCast} />
-					<SearchDrawer
-						toggleDrawer={toggleDrawer}
-						isOpen={value}
-						setWeatherForeCast={setWeatherForeCast}
-					/>
+				{/* <div className="debug"> */}
+				<Widget forecast={weatherForeCast} />
+				<Carousel forecast={weatherForeCast} />
+				{/* </div> */}
+				<div className="flex flex-col items-center debug">
+					<div className="flex justify-center w-[91.6%]">
+						<SearchDrawer
+							toggleDrawer={toggleDrawer}
+							isOpen={value}
+							setWeatherForeCast={setWeatherForeCast}
+						/>
+					</div>
 					<Navbar toggleDrawer={toggleDrawer} />
 				</div>
 			</div>

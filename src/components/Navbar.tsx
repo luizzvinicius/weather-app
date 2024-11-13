@@ -3,7 +3,7 @@ import { Icon } from "@iconify-icon/react"
 
 export default function Navbar({ toggleDrawer }: { toggleDrawer: any }) {
 	return (
-		<div className="flex justify-center z-10">
+		<div className="flex justify-center w-11/12">
 			<div className="bg-[#1d1e30] w-11/12 h-14 flex justify-evenly items-center rounded-2xl">
 				<Icon
 					icon="fluent:home-24-filled"
