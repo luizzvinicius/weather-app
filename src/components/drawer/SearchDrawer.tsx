@@ -26,9 +26,9 @@ export default function SearchDrawer({
 	})
 
 	return (
-		<div className={`${isOpen ? "open" : "closed"}Drawer bg-[#1d1e30] `}>
+		<div className={`${isOpen ? "open" : "closed"}Drawer bg-[#1d1e30]`}>
 			<button type="button" onClick={toggleDrawer}>
-				X
+				<Icon icon="carbon:close-outline" />
 			</button>
 			<h1>Consulte sua cidade</h1>
 			<div className="flex justify-center items-center gap-x-2">

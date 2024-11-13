@@ -5,7 +5,9 @@ export default function Widget({ forecast }: { forecast: ThreeHourResponse | und
 	const currentWeather = forecast?.list[0]
 	const iconUrl = `https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`
 
-	return (
+	return forecast === undefined ? (
+		<></>
+	) : (
 		<div className="flex flex-col items-center">
 			<div>
 				<span className="text-white">{forecast?.city.name}</span>
