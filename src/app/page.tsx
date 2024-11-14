@@ -30,10 +30,8 @@ export default function Home() {
 
 					<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
 				</header>
-				{/* <div className="debug"> */}
 				<Widget forecast={weatherForeCast} />
 				<Carousel forecast={weatherForeCast} />
-				{/* </div> */}
 				<div className="flex flex-col items-center debug">
 					<div className="flex justify-center w-[91.6%]">
 						<SearchDrawer
