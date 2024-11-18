@@ -1,18 +1,24 @@
 import { useQuery } from "@tanstack/react-query"
+import axios from "axios"
+import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
 
 const getWeatherByCity = async (cityName: string) => {
-	const request = await fetch(
+	const request = await axios.get<ThreeHourResponse>(
 		`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&lang=pt_br&appid=${process.env.NEXT_PUBLIC_API_KEY}`,
 	)
-	const data = await request.json()
-	return data
+	return request.data
 }
 
-export function useWeatherForecast(obj: any) {
+type UseWeatherForecastParam = {
+	value: string
+	valid: boolean
+}
+
+export function useWeatherForecast(param: UseWeatherForecastParam) {
 	const query = useQuery({
-		queryFn: () => getWeatherByCity(obj.value),
+		queryFn: () => getWeatherByCity(param.value),
 		queryKey: ["getWeather"],
-		enabled: obj.valid,
+		enabled: param.valid,
 		refetchOnWindowFocus: false,
 	})
 	return query
