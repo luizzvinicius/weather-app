@@ -14,7 +14,7 @@ const queryClient = new QueryClient()
 
 export default function Home() {
 	const { value, toggleDrawer } = useToggle()
-	const [weatherForeCast, setWeatherForeCast] = useState<ThreeHourResponse | undefined>()
+	const [weatherForeCast, setWeatherForecast] = useState<ThreeHourResponse | undefined>()
 
 	return (
 		<QueryClientProvider client={queryClient}>
@@ -37,7 +37,7 @@ export default function Home() {
 						<SearchDrawer
 							toggleDrawer={toggleDrawer}
 							isOpen={value}
-							setWeatherForeCast={setWeatherForeCast}
+							setWeatherForecast={setWeatherForecast}
 						/>
 					</div>
 					<Navbar toggleDrawer={toggleDrawer} />

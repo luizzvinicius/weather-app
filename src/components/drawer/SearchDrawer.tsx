@@ -9,11 +9,11 @@ import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
 export default function SearchDrawer({
 	toggleDrawer,
 	isOpen,
-	setWeatherForeCast,
+	setWeatherForecast,
 }: {
 	toggleDrawer: () => void
 	isOpen: boolean
-	setWeatherForeCast: Dispatch<ThreeHourResponse | undefined>
+	setWeatherForecast: Dispatch<ThreeHourResponse | undefined>
 }) {
 	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
@@ -26,7 +26,7 @@ export default function SearchDrawer({
 
 	useEffect(() => {
 		if (!isPending && !isError) {
-			setWeatherForeCast(data)
+			setWeatherForecast(data)
 		}
 	})
 

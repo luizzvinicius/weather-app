@@ -1,6 +1,5 @@
 "use client"
 import { Icon } from "@iconify-icon/react"
-import type { Dispatch } from "react"
 
 export default function Navbar({ toggleDrawer }: { toggleDrawer: () => void }) {
 	return (
