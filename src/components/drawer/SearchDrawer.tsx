@@ -1,15 +1,20 @@
 "use client"
 import { useWeatherForecast } from "@/hooks/useWeatherForecast"
-import { useDeferredValue, useEffect, useState } from "react"
+import { type Dispatch, useDeferredValue, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Icon } from "@iconify-icon/react"
+import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
 
 export default function SearchDrawer({
 	toggleDrawer,
 	isOpen,
 	setWeatherForeCast,
-}: { toggleDrawer: () => void; isOpen: boolean; setWeatherForeCast: any }) {
+}: {
+	toggleDrawer: () => void
+	isOpen: boolean
+	setWeatherForeCast: Dispatch<ThreeHourResponse | undefined>
+}) {
 	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
 	// se não tem erro, nem está pendente, foi

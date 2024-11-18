@@ -1,7 +1,8 @@
 "use client"
 import { Icon } from "@iconify-icon/react"
+import type { Dispatch } from "react"
 
-export default function Navbar({ toggleDrawer }: { toggleDrawer: any }) {
+export default function Navbar({ toggleDrawer }: { toggleDrawer: () => void }) {
 	return (
 		<div className="flex justify-center w-11/12">
 			<div className="bg-[#1d1e30] w-11/12 h-14 flex justify-evenly items-center rounded-2xl">
