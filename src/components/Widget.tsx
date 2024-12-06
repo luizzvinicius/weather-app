@@ -7,14 +7,14 @@ export default function Widget({ forecast }: { forecast: ThreeHourResponse | und
 
 	return (
 		<div className="flex flex-col items-center">
-			<div className={`${forecast === undefined ? "skeleton skeleton-text" : ""}`}>
+			<div className={`${forecast === undefined && "skeleton skeleton-text"}`}>
 				<span className="text-white">{forecast?.city.name}</span>
 				<span className="text-white">, {forecast?.city.country}</span>
 			</div>
-			<div className={`${forecast === undefined ? "skeleton skeleton-image my-2" : ""}`}>
+			<div className={`${forecast === undefined && "skeleton skeleton-image my-2"}`}>
 				<img className="text-white" src={iconUrl} alt="weather icon" />
 			</div>
-			<div className={`${forecast === undefined ? "skeleton skeleton-icon" : ""} mb-2`}>
+			<div className={`${forecast === undefined && "skeleton skeleton-icon"} mb-2`}>
 				<p className="text-white text-center">{currentWeather?.main.temp.toFixed(0)} °C</p>
 				<p className="text-white text-center">{currentWeather?.weather.at(-1)?.description}</p>
 			</div>

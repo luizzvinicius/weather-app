@@ -17,17 +17,20 @@ export default function SearchDrawer({
 }) {
 	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
-	// se não tem erro, nem está pendente, foi
+	console.log(`input: ${inputValue.value}\ndeferred: ${deferredInput.value}`)
+
+	const { data, isFetching, isError, refetch } = useWeatherForecast(deferredInput)
 
 	function handleClick() {
+		if (inputValue.valid) {
+			refetch()
+			return
+		}
 		setValue(prev => ({ ...prev, valid: true }))
 	}
-	const { data, isPending, isError } = useWeatherForecast(deferredInput)
 
 	useEffect(() => {
-		if (!isPending && !isError) {
-			setWeatherForecast(data)
-		}
+		setWeatherForecast(data)
 	})
 
 	return (
@@ -43,11 +46,15 @@ export default function SearchDrawer({
 					value={inputValue.value}
 					onChange={e => setValue(prev => ({ ...prev, value: e.target.value }))}
 				/>
-				<Button type="button" onClick={handleClick} className="bg-black">
-					<Icon icon="mynaui:search" className="text-white text-lg cursor-pointer" />
+				<Button type="button" onClick={handleClick} className="bg-black" disabled={isFetching}>
+					{isFetching ? (
+						"..."
+					) : (
+						<Icon icon="mynaui:search" className="text-white text-lg cursor-pointer" />
+					)}
 				</Button>
 			</div>
-			{isError ? <h1>Error while Fetching</h1> : <></>}
+			{isError && <h1>Error while Fetching</h1>}
 		</div>
 	)
 }

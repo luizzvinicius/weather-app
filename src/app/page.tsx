@@ -28,7 +28,7 @@ export default function Home() {
 				</header>
 				<Widget forecast={weatherForeCast} />
 				<Carousel forecast={weatherForeCast} />
-				<div className="flex flex-col items-center debug">
+				<div className="flex flex-col items-center">
 					<div className="flex justify-center w-[91.6%]">
 						<SearchDrawer
 							toggleDrawer={toggleDrawer}
