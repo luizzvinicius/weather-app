@@ -18,15 +18,11 @@ export default function Home() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className="bg-black h-screen flex justify-between flex-col pb-5">
+			<div className="bg-black min-h-screen flex justify-between flex-col pb-5">
 				<header className="flex justify-between items-center p-4">
 					<Icon icon="hugeicons:menu-09" className="text-white text-lg" />
 
-					{weatherForeCast === undefined ? (
-						<span className="text-white">Pesquise uma cidade</span>
-					) : (
-						<></>
-					)}
+					{weatherForeCast === undefined && <span className="text-white">Pesquise uma cidade</span>}
 
 					<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
 				</header>
