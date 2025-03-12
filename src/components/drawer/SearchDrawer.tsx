@@ -17,7 +17,7 @@ export default function SearchDrawer({
 }) {
 	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
-	console.log(`input: ${inputValue.value}\ndeferred: ${deferredInput.value}`)
+	// console.log(`input: ${inputValue.value}\ndeferred: ${deferredInput.value}`)
 
 	const { data, isFetching, isError, refetch } = useWeatherForecast(deferredInput)
 
