@@ -9,36 +9,37 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { useState } from "react"
 import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
+import { ForecastContext } from "../hooks/contexts/useForecastContext"
 
 const queryClient = new QueryClient()
 
 export default function Home() {
 	const { value, toggleDrawer } = useToggle()
-	const [weatherForeCast, setWeatherForecast] = useState<ThreeHourResponse | undefined>()
+	const [weatherForecast, setWeatherForecast] = useState<ThreeHourResponse | undefined>()
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<div className="bg-black min-h-screen flex justify-between flex-col pb-5">
-				<header className="flex justify-between items-center p-4">
-					<Icon icon="hugeicons:menu-09" className="text-white text-lg" />
+			<ForecastContext.Provider value={{ weatherForecast, setWeatherForecast }}>
+				<div className="bg-black min-h-screen flex justify-between flex-col pb-5">
+					<header className="flex justify-between items-center p-4">
+						<Icon icon="hugeicons:menu-09" className="text-white text-lg" />
 
-					{weatherForeCast === undefined && <span className="text-white">Pesquise uma cidade</span>}
+						{weatherForecast === undefined && (
+							<span className="text-white">Pesquise uma cidade</span>
+						)}
 
-					<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
-				</header>
-				<Widget forecast={weatherForeCast} />
-				<Carousel forecast={weatherForeCast} />
-				<div className="flex flex-col items-center">
-					<div className="flex justify-center w-[91.6%]">
-						<SearchDrawer
-							toggleDrawer={toggleDrawer}
-							isOpen={value}
-							setWeatherForecast={setWeatherForecast}
-						/>
+						<Icon icon="cuida:calendar-outline" className="text-white text-lg" />
+					</header>
+					<Widget />
+					<Carousel />
+					<div className="flex flex-col items-center">
+						<div className="flex justify-center w-[91.6%]">
+							<SearchDrawer toggleDrawer={toggleDrawer} isOpen={value} />
+						</div>
+						<Navbar toggleDrawer={toggleDrawer} />
 					</div>
-					<Navbar toggleDrawer={toggleDrawer} />
 				</div>
-			</div>
+			</ForecastContext.Provider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	)

@@ -1,20 +1,18 @@
-"use client"
 import { useWeatherForecast } from "@/hooks/useWeatherForecast"
-import { type Dispatch, useDeferredValue, useEffect, useState } from "react"
+import { useDeferredValue, useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Icon } from "@iconify-icon/react"
-import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
+import { useForecastContext } from "@/hooks/contexts/useForecastContext"
 
 export default function SearchDrawer({
 	toggleDrawer,
 	isOpen,
-	setWeatherForecast,
 }: {
 	toggleDrawer: () => void
 	isOpen: boolean
-	setWeatherForecast: Dispatch<ThreeHourResponse | undefined>
 }) {
+	const { setWeatherForecast } = useForecastContext()
 	const [inputValue, setValue] = useState({ value: "", valid: false })
 	const deferredInput = useDeferredValue(inputValue)
 	// console.log(`input: ${inputValue.value}\ndeferred: ${deferredInput.value}`)
@@ -30,8 +28,10 @@ export default function SearchDrawer({
 	}
 
 	useEffect(() => {
-		setWeatherForecast(data)
-	})
+		if (data) {
+			setWeatherForecast(data)
+		}
+	}, [setWeatherForecast, data])
 
 	return (
 		<div className={`${isOpen ? "open" : "closed"}Drawer bg-[#1d1e30]`}>

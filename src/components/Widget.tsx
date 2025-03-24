@@ -1,7 +1,8 @@
-import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
+import { useForecastContext } from "../hooks/contexts/useForecastContext"
 import { Icon } from "@iconify-icon/react"
 
-export default function Widget({ forecast }: { forecast: ThreeHourResponse | undefined }) {
+export default function Widget() {
+	const forecast = useForecastContext().weatherForecast
 	const currentWeather = forecast?.list[0]
 	const iconUrl = `https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`
 

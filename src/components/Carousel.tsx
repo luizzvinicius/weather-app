@@ -1,8 +1,8 @@
+import { useForecastContext } from "../hooks/contexts/useForecastContext"
 import { Icon } from "@iconify-icon/react"
-import type { ThreeHourResponse } from "openweathermap-ts/dist/types"
 
-export default function Carousel({ forecast }: { forecast: ThreeHourResponse | undefined }) {
-	const weathers = forecast?.list
+export default function Carousel() {
+	const weathers = useForecastContext().weatherForecast?.list
 	const mock = Array.from({ length: 14 }, (_, i) => i)
 
 	return (
