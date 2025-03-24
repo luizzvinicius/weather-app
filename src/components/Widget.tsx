@@ -5,16 +5,21 @@ import { Icon } from "@iconify-icon/react"
 export default function Widget() {
 	const forecast = useForecastContext().weatherForecast
 	const currentWeather = forecast?.list[0]
-	const iconUrl = `https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`
 
 	return (
 		<div className="flex flex-col items-center">
 			<div className={`${forecast === undefined && "skeleton skeleton-text"}`}>
-				<span className="text-white">{forecast?.city.name}</span>
-				<span className="text-white">, {forecast?.city.country}</span>
+				<span className="text-white">
+					{forecast?.city.name}, {forecast?.city.country}
+				</span>
 			</div>
 			<div className={`${forecast === undefined && "skeleton skeleton-image my-2"}`}>
-				<Image className="text-white" src={iconUrl} width={48} height={48} alt="weather icon" />
+				<Image
+					src={`https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`}
+					width={120}
+					height={120}
+					alt="weather icon"
+				/>
 			</div>
 			<div className={`${forecast === undefined && "skeleton skeleton-icon"} mb-2`}>
 				<p className="text-white text-center">{currentWeather?.main.temp.toFixed(0)} °C</p>
