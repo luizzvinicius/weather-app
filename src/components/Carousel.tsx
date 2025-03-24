@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { useForecastContext } from "../hooks/contexts/useForecastContext"
 import { Icon } from "@iconify-icon/react"
 
@@ -17,9 +18,10 @@ export default function Carousel() {
 					: weathers.map(w => (
 							<div key={w.dt} className="bg-[#1d1e30] flex flex-col items-center p-2 rounded-xl">
 								<div>
-									<img
-										width={48}
+									<Image
 										src={`https://openweathermap.org/img/wn/${w.weather[0].icon}@2x.png`}
+										width={48}
+										height={48}
 										alt="Forecast icon"
 									/>
 								</div>

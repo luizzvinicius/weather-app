@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { useForecastContext } from "../hooks/contexts/useForecastContext"
 import { Icon } from "@iconify-icon/react"
 
@@ -13,7 +14,7 @@ export default function Widget() {
 				<span className="text-white">, {forecast?.city.country}</span>
 			</div>
 			<div className={`${forecast === undefined && "skeleton skeleton-image my-2"}`}>
-				<img className="text-white" src={iconUrl} alt="weather icon" />
+				<Image className="text-white" src={iconUrl} width={48} height={48} alt="weather icon" />
 			</div>
 			<div className={`${forecast === undefined && "skeleton skeleton-icon"} mb-2`}>
 				<p className="text-white text-center">{currentWeather?.main.temp.toFixed(0)} °C</p>
