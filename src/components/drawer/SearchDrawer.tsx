@@ -6,11 +6,11 @@ import { Icon } from "@iconify-icon/react"
 import { useForecastContext } from "@/hooks/contexts/useForecastContext"
 
 export default function SearchDrawer({
-	toggleDrawer,
 	isOpen,
+	setDrawer,
 }: {
-	toggleDrawer: () => void
 	isOpen: boolean
+	setDrawer: (clickedDrawer: string, isOpen: boolean) => void
 }) {
 	const { setWeatherForecast } = useForecastContext()
 	const [inputValue, setValue] = useState({ value: "", valid: false })
@@ -35,9 +35,12 @@ export default function SearchDrawer({
 
 	return (
 		<div className={`${isOpen ? "open" : "closed"}Drawer bg-[#1d1e30]`}>
-			<button type="button" onClick={toggleDrawer}>
-				<Icon icon="carbon:close-outline" />
-			</button>
+			<Icon
+				icon="carbon:close-outline"
+				className="text-white"
+				onClick={() => setDrawer("search", false)}
+			/>
+
 			<h1>Consulte sua cidade</h1>
 			<div className="flex justify-center items-center gap-x-2">
 				<Input

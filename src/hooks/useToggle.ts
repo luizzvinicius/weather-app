@@ -1,10 +1,13 @@
 import { useState } from "react"
 
 export default function useToggle() {
-	const [value, setValue] = useState<boolean>(true)
+	const [value, setValue] = useState({
+		clickedDrawer: "",
+		isOpen: false,
+	})
 
-	const toggleDrawer = () => {
-		setValue(!value)
+	function toggleDrawer(clickedDrawer: string, isOpen: boolean) {
+		setValue({ clickedDrawer, isOpen })
 	}
 
 	return {
